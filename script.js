@@ -8,7 +8,6 @@ function Book(title, author, numPages, read) {
 }
 
 const books = document.querySelector('.books');
-let allReadBtns = document.querySelectorAll('.reading');
 
 function addBookToLibrary(title, author, numPages, read) {
     let newBook = new Book(title, author, numPages, read);
@@ -47,15 +46,20 @@ function addBookToLibrary(title, author, numPages, read) {
             }
         }
     })
+    removeBtn.addEventListener('click', () => {
+        books.removeChild(newDiv);
+        for(let i = 0; i < myLibrary.length; i++) {
+            if(myLibrary[i].title == removeBtn.id) {
+                myLibrary.splice(i, 1);
+            }
+        }
+    })
     newDiv.appendChild(newTitle);
     newDiv.appendChild(newAuthor);
     newDiv.appendChild(newPages);
     newDiv.appendChild(newRead);
     newDiv.appendChild(removeBtn);
     books.appendChild(newDiv);
-    allReadBtns = document.querySelectorAll('.reading');
-
-  
 }
 
 const addBtn = document.querySelector('.adding');
