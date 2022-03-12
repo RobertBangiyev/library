@@ -1,0 +1,111 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background-color: #5065a8;
+
+}
+
+img {
+    width: 10vw;
+    margin-left: 5vw;
+}
+
+body {
+    margin: 0;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: space-around; */
+    height: 75vh;
+}
+
+button {
+    font-size: 24px;
+    font-weight: 600;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    outline: none;
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    /* flex: 0; */
+}
+
+button:hover {
+    background-color: rgb(207, 207, 207);
+}
+
+.books {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid black;
+    padding: 10px;
+    position: fixed;
+    top: 250px;
+    background-color: rgb(155, 154, 154);
+    border-radius: 10px;
+}
+
+form button {
+    border: 1px solid black;
+    font-size: 15px;
+    padding: 5px;
+}
+
+.hidden {
+    display: none;
+}
+
+.books > div {
+    width: 200px;
+    height: 300px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.books > div > p {
+    text-align: center;
+}
+
+.books > div > button {
+    font-size: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
