@@ -7,37 +7,53 @@ function Book(title, author, numPages, read) {
     this.read = read;
 }
 
-// Book.prototype.createBook = function(title, author, numPages, read) {
-//     this.title = title;
-//     this.author = author;
-//     this.numPages = numPages;
-//     this.read = read;
-// }
-
 const books = document.querySelector('.books');
+let allReadBtns = document.querySelectorAll('.reading');
 
 function addBookToLibrary(title, author, numPages, read) {
-  // do stuff here
     let newBook = new Book(title, author, numPages, read);
-  myLibrary.push(newBook);
-  let newDiv = document.createElement('div');
-  let newTitle = document.createElement('p');
-  newTitle.textContent = title;
-  let newAuthor = document.createElement('p');
-  newAuthor.textContent = author;
-  let newPages = document.createElement('p');
-  newPages.textContent = numPages;
-  let newRead = document.createElement('button');
-  newRead.textContent = read ? "Read" : "Not Read";
-  let removeBtn = document.createElement('button');
-  removeBtn.textContent = 'Remove';
-  newDiv.appendChild(newTitle);
-  newDiv.appendChild(newAuthor);
-  newDiv.appendChild(newPages);
-  newDiv.appendChild(newRead);
-  newDiv.appendChild(removeBtn);
+    myLibrary.push(newBook);
+    let newDiv = document.createElement('div');
+    let newTitle = document.createElement('p');
+    newTitle.textContent = title;
+    let newAuthor = document.createElement('p');
+    newAuthor.textContent = author;
+    let newPages = document.createElement('p');
+    newPages.textContent = numPages;
+    let newRead = document.createElement('button');
+    newRead.textContent = read ? "Read" : "Not Read";
+    newRead.setAttribute('id', title);
+    newRead.classList.add('reading');
+    let removeBtn = document.createElement('button');
+    removeBtn.textContent = 'Remove';
+    removeBtn.setAttribute('id', title);
+    newRead.addEventListener('click', () => {
+        if(newRead.textContent == 'Read') {
+            console.log('epic');
+            newRead.textContent = 'Not Read';
+            for(let i of myLibrary) {
+                if(i.title == newRead.id) {
+                    i.read = false;
+                    break;
+                }
+            }
+        } else {
+            newRead.textContent = 'Read';
+            for(let i of myLibrary) {
+                if(i.title == newRead.id) {
+                    i.read = true;
+                    break;
+                }
+            }
+        }
+    })
+    newDiv.appendChild(newTitle);
+    newDiv.appendChild(newAuthor);
+    newDiv.appendChild(newPages);
+    newDiv.appendChild(newRead);
+    newDiv.appendChild(removeBtn);
     books.appendChild(newDiv);
-
+    allReadBtns = document.querySelectorAll('.reading');
 
   
 }
@@ -71,13 +87,3 @@ submitBtn.addEventListener('click', () => {
         return false;
     }
 })
-
-
-// const readBtn = document.querySelector('.books>div>button');
-// readBtn.addEventListener('click', () => {
-//     if(readBtn.textContent == 'Read') {
-//         readBtn.textContent = 'Not Read';
-//     } else {
-//         readBtn.textContent = 'Read';
-//     }
-// })
