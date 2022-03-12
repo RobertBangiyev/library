@@ -16,25 +16,25 @@
         <div class="body">
             <div class="form">
                 <button class="adding">+ Add Book</button>
-                <form action="#" class="hidden">
+                <div class="forms hidden">
                     <label for="name">
                         Book name:
-                        <input type="text" name="name" id="name">
+                        <input type="text" name="name" id="name" required>
                     </label>
                     <label for="author">
                         Book author:
-                        <input type="text" name="author" id="author">
+                        <input type="text" name="author" id="author" required>
                     </label>
                     <label for="numPages">
                         Page count:
-                        <input type="text" name="numPages" id="numPages">
+                        <input type="number" name="numPages" id="numPages" required>
                     </label>
                     <label for="read">
                         Finished Reading
                         <input type="checkbox" name="read" id="read">
                     </label>
-                    <button>Submit</button>
-                </form>
+                    <button class="submit">Submit</button>
+                </div>
             </div>
             <div class="books">
                 <!-- <div>
@@ -42,6 +42,7 @@
                     <p>Author: George RR Martin</p>
                     <p>Pages: 160</p>
                     <button>Read</button>
+                    <button>Remove</button>
                 </div> -->
                 <!-- <div></div>
                 <div></div>
