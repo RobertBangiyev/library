@@ -1,65 +1,48 @@
-let myLibrary = [];
-
-function Book(title, author, numPages, read) {
-    this.title = title;
-    this.author = author;
-    this.numPages = numPages;
-    this.read = read;
+class Book {
+    constructor(title, author, numPages, read) {
+        this.title = title;
+        this.author = author;
+        this.numPages = numPages;
+        this.read = read;
+    }
 }
 
-const books = document.querySelector('.books');
-
-function addBookToLibrary(title, author, numPages, read) {
-    let newBook = new Book(title, author, numPages, read);
-    myLibrary.push(newBook);
-    let newDiv = document.createElement('div');
-    let newTitle = document.createElement('p');
-    newTitle.textContent = title;
-    let newAuthor = document.createElement('p');
-    newAuthor.textContent = author;
-    let newPages = document.createElement('p');
-    newPages.textContent = numPages;
-    let newRead = document.createElement('button');
-    newRead.textContent = read ? "Read" : "Not Read";
-    newRead.setAttribute('id', title);
-    newRead.classList.add('reading');
-    let removeBtn = document.createElement('button');
-    removeBtn.textContent = 'Remove';
-    removeBtn.setAttribute('id', title);
-    newRead.addEventListener('click', () => {
-        if(newRead.textContent == 'Read') {
-            console.log('epic');
-            newRead.textContent = 'Not Read';
-            for(let i of myLibrary) {
-                if(i.title == newRead.id) {
-                    i.read = false;
-                    break;
-                }
-            }
-        } else {
-            newRead.textContent = 'Read';
-            for(let i of myLibrary) {
-                if(i.title == newRead.id) {
-                    i.read = true;
-                    break;
-                }
-            }
-        }
-    })
-    removeBtn.addEventListener('click', () => {
-        books.removeChild(newDiv);
-        for(let i = 0; i < myLibrary.length; i++) {
-            if(myLibrary[i].title == removeBtn.id) {
-                myLibrary.splice(i, 1);
-            }
-        }
-    })
-    newDiv.appendChild(newTitle);
-    newDiv.appendChild(newAuthor);
-    newDiv.appendChild(newPages);
-    newDiv.appendChild(newRead);
-    newDiv.appendChild(removeBtn);
-    books.appendChild(newDiv);
+class Library {
+    constructor() {
+        this.books = {};
+        this.DOMbooks = document.querySelector('.books');
+    }
+    addBook(book) {
+        this.books[book.title] = book;
+        const title = book.title;
+        const author = book.author;
+        const numPages = book.numPages;
+        const read = book.read;
+        let newDiv = document.createElement('div');
+        let newTitle = document.createElement('p');
+        newTitle.textContent = title;
+        let newAuthor = document.createElement('p');
+        newAuthor.textContent = author;
+        let newPages = document.createElement('p');
+        newPages.textContent = numPages;
+        let newRead = document.createElement('button');
+        newRead.textContent = read ? "Read" : "Not Read";
+        newRead.setAttribute('id', title);
+        newRead.classList.add('reading');
+        let removeBtn = document.createElement('button');
+        removeBtn.textContent = 'Remove';
+        removeBtn.setAttribute('id', title);
+        newRead.addEventListener('click', () => {
+            newRead.textContent === 'Read' ? this.books[newRead.id].read = 'Not Read' : this.books[newRead.id].read = 'Read';
+            newRead.textContent === 'Read' ? newRead.textContent = 'Not Read' : newRead.textContent = 'Read';
+        });
+        removeBtn.addEventListener('click', () => {
+            this.DOMbooks.removeChild(newDiv);
+            delete this.books[removeBtn.id];
+        })
+        newDiv.append(newTitle, newAuthor, newPages, newRead, removeBtn);
+        this.DOMbooks.appendChild(newDiv);
+    }
 }
 
 const addBtn = document.querySelector('.adding');
@@ -69,6 +52,7 @@ const title = document.querySelector('#name');
 const author = document.querySelector('#author');
 const numPages = document.querySelector('#numPages');
 const read = document.querySelector('#read');
+const library = new Library();
 
 addBtn.addEventListener('click', () => {
     form.classList.toggle('hidden');
@@ -80,7 +64,8 @@ submitBtn.addEventListener('click', () => {
         if(read.checked) {
             isRead = true;
         }
-        addBookToLibrary(title.value, author.value, numPages.value, isRead);
+        const currBook = new Book(title.value, author.value, numPages.value, isRead);
+        library.addBook(currBook);
         title.value = '';
         author.value = '';
         numPages.value = '';
